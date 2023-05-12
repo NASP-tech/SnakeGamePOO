@@ -86,7 +86,7 @@ public class snake {
     public void createFirstSnake(){
         //initally the snake has small lenght 3
         for (int i = 0; i < 3; i++){
-            lb[i] = new JButton("lb" + iO);
+            lb[i] = new JButton("lb" + i);
             lb[i].setEnabled(false);
             p1.add(lb[i]);
             lb[i].setBounds(lbx[i], lby[i], 10, 10);
@@ -96,6 +96,19 @@ public class snake {
         }
     }
 
+    public void createbar(){
+        mymbar = new JMenuBar();
+        game = new JMenu("GAME");
+        JMenuItem newgame = new JMenuItem("New Game");
+        JMenuItem exit = new JMenuItem("Exit");
+        newgame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+    }
+    
     private Object getContentPane() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
