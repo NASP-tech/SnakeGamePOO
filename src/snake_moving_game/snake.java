@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class snake {
+public class snake extends JFrame implements KeyListener, Runnable{
 
     JPanel p1, p2;
     JButton[] lb = new JButton[200];
@@ -42,9 +42,10 @@ public class snake {
         runu = true;
         rund = true;
         boundsflag = true;
-        
+
     }
-    snake(){
+
+    snake() {
         super("snake");
         setSize(1000, 590);
         //create menubar with function
@@ -54,7 +55,7 @@ public class snake {
         p1 = new JPanel();
         p2 = new JPanel();
         //t will view the score
-        t = new JTextArea("Score==>"+score);
+        t = new JTextArea("Score==>" + score);
         t.setEnabled(false);
         t.setBackground(Color.BLACK);
         //snake have to eat boundsfood to grow up
@@ -63,15 +64,15 @@ public class snake {
         //will make first snake
         createFirstSnake();
         p1.setLayout(null);
-        p2.setLayout(new GridLayout(0,1));
+        p2.setLayout(new GridLayout(0, 1));
         p1.setBounds(0, 0, x, y);
         p1.setBackground(Color.blue);
         p2.setBounds(0, y, x, 30);
         p2.setBackground(Color.RED);
-        
+
         p2.add(t);
-        
-        getContentPane().setLayout(null);        
+
+        getContentPane().setLayout(null);
         getContentPane().add(p1);
         getContentPane().add(p2);
         show();
@@ -80,23 +81,23 @@ public class snake {
         //Start thread 
         myt = new Thread(this);
         myt.start(); // go to run() method
-        
+
     }
-    
-    public void createFirstSnake(){
+
+    public void createFirstSnake() {
         //initally the snake has small lenght 3
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             lb[i] = new JButton("lb" + i);
             lb[i].setEnabled(false);
             p1.add(lb[i]);
             lb[i].setBounds(lbx[i], lby[i], 10, 10);
-            lbx[i+1] = lbx[i] - 10;            
-            lby[i+1]=lby[i];            
-            
+            lbx[i + 1] = lbx[i] - 10;
+            lby[i + 1] = lby[i];
+
         }
     }
 
-    public void createbar(){
+    public void createbar() {
         mymbar = new JMenuBar();
         game = new JMenu("GAME");
         JMenuItem newgame = new JMenuItem("New Game");
@@ -107,19 +108,19 @@ public class snake {
                 reset();
             }
         });
-        
+
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        
+
         game.add(newgame);
         game.addSeparator();
         game.add(exit);
         mymbar.add(game);
-        level=new JMenu("Level");
+        level = new JMenu("Level");
         help = new JMenu("Help");
         JMenuItem creator = new JMenuItem("Creator");
         JMenuItem instruction = new JMenuItem("Instruction");
@@ -129,24 +130,34 @@ public class snake {
                 JOptionPane.showMessageDialog(p2, "Name" + ":Nat Sol");
             }
         });
-        
+
         help.add(creator);
         help.add(instruction);
         mymbar.add(help);
         setJMenuBar(mymbar);
     }
-    
-    void reset(){
+
+    void reset() {
         initializeValues();
         p1.removeAll();
-        
-    }
-    
-    private Object getContentPane() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        myt.stop();
+        createFirstSnake();
+        t.setText("Score==>" + score);
+        myt = new Thread(this);
+        myt.start();
     }
 
-    private void createFirstSnake() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    void growup(){
+        lb[gu] = new JButton();
+        lb[gu].setEnabled(false);
+        p1.add(lb[gu]);
+        int a = 10 + (10*r.nextInt(48));
+        int b = 10 + (10*r.nextInt(23));
+        lbx[gu]=a;
+        lby[gu]=b;
+        lb[gu].setBounds(a, b, 10, 10);
+        gu++;
     }
+    
+    
 }
