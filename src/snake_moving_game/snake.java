@@ -104,9 +104,42 @@ public class snake {
         newgame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                reset();
             }
         });
+        
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        
+        game.add(newgame);
+        game.addSeparator();
+        game.add(exit);
+        mymbar.add(game);
+        level=new JMenu("Level");
+        help = new JMenu("Help");
+        JMenuItem creator = new JMenuItem("Creator");
+        JMenuItem instruction = new JMenuItem("Instruction");
+        creator.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(p2, "Name" + ":Nat Sol");
+            }
+        });
+        
+        help.add(creator);
+        help.add(instruction);
+        mymbar.add(help);
+        setJMenuBar(mymbar);
+    }
+    
+    void reset(){
+        initializeValues();
+        p1.removeAll();
+        
     }
     
     private Object getContentPane() {
