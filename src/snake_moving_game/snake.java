@@ -68,7 +68,7 @@ public class snake extends JFrame implements KeyListener, Runnable {
         p1.setLayout(null);
         p2.setLayout(new GridLayout(0, 1));
         p1.setBounds(0, 0, x, y);
-        p1.setBackground(Color.blue);
+        p1.setBackground(Color.DARK_GRAY);
         p2.setBounds(0, y, x, 30);
         p2.setBackground(Color.RED);
 
@@ -286,7 +286,7 @@ public class snake extends JFrame implements KeyListener, Runnable {
         }
     }
 
-    public static void main(String args[]) {
-        snake s = new snake();
-    }
+//    public static void main(String args[]) {
+//        snake s = new snake();
+//    }
 }

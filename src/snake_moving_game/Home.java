@@ -92,7 +92,8 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
-        
+        snake s = new snake();
+        s.setVisible(true);
     }//GEN-LAST:event_btnNewGameActionPerformed
 
     /**
