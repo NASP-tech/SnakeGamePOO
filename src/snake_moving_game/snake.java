@@ -13,7 +13,8 @@ public class snake extends JFrame implements KeyListener, Runnable {
     JButton[] lb = new JButton[200];
     JButton boundsfood;
     JTextArea t;
-    int x = 1000, y = 500, gu = 2, directionx = 1, directiony = 0, speed = 100, difference = 0, oldx, oldy, score = 0;
+    int x = 1000, y = 500, gu = 2, directionx = 1, directiony = 0,
+            speed = 100, difference = 0, oldx, oldy, score = 0;
 
     int[] lbx = new int[600];
     int[] lby = new int[600];
@@ -67,7 +68,7 @@ public class snake extends JFrame implements KeyListener, Runnable {
         p1.setLayout(null);
         p2.setLayout(new GridLayout(0, 1));
         p1.setBounds(0, 0, x, y);
-        p1.setBackground(Color.blue);
+        p1.setBackground(Color.DARK_GRAY);
         p2.setBounds(0, y, x, 30);
         p2.setBackground(Color.RED);
 
@@ -204,18 +205,16 @@ public class snake extends JFrame implements KeyListener, Runnable {
                 boundsflag = true;
             }
         }
-        
-        if(food == false){
+
+        if (food == false) {
             growup();
             food = true;
-        }
-        
-        else{
-            lb[gu-1].setBounds(lbx[gu-1], lby[gu-1], 10, 10);            
+        } else {
+            lb[gu - 1].setBounds(lbx[gu - 1], lby[gu - 1], 10, 10);
         }
 
-        for(int i = 1; i < gu; i++){
-            if(lbp[0]==lbp[i]){
+        for (int i = 1; i < gu; i++) {
+            if (lbp[0] == lbp[i]) {
                 t.setText("Game over  -" + score);
                 try {
                     myt.join();
@@ -223,14 +222,71 @@ public class snake extends JFrame implements KeyListener, Runnable {
                 }
             }
         }
-        
+
         p1.repaint();
         show();
-                
-    }
-    
-    
-    
-    
 
+    }
+
+    public void keyPressed(KeyEvent e) {
+        //snake move to left when player pressed left arrow
+        if (run1 == true && e.getKeyCode() == 37) {
+            directionx = -10;
+            directiony = 0;
+            runr = false;
+            runu = true;
+            rund = true;
+
+        }
+
+        //snake move to up when player pressed up arrow 
+        if (runu == true && e.getKeyCode() == 38) {
+            directionx = 0;
+            directiony = -10;
+            rund = false;
+            runr = true;
+            run1 = true;
+
+        }
+
+        //snake move to right when player pressed right arrow
+        if (runr == true && e.getKeyCode() == 39) {
+            directionx = +10;
+            directiony = 0;
+            run1 = false;
+            runu = true;
+            rund = true;
+
+        }
+
+        //snake move to down when player pressed down arrow
+        if (rund == true && e.getKeyCode() == 40) {
+            directionx = 0;
+            directiony = +10;
+            runu = false;
+            runr = true;
+            run1 = true;
+        }
+
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void run() {
+        for (;;) {
+            moveForward();
+            try {
+                Thread.sleep(speed);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+//    public static void main(String args[]) {
+//        snake s = new snake();
+//    }
 }
